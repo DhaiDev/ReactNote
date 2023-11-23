@@ -1,36 +1,45 @@
-## Traditional Approach (Without Virtual DOM):
+## 传统方法（无虚拟 DOM）：
 
-1. **Data**
-2. **Template**
-3. Combine **data + template** to generate real DOM for display.
-4. When **state changes**, repeat the process to generate a new real DOM and replace the original DOM.
+1. **数据**
+2. **模板**
+3. 结合 **数据 + 模板** 生成真实 DOM 进行显示。
+4. 当 **状态发生改变** 时，重复这个过程以生成新的真实 DOM 并替换原始的 DOM。
 
-**Drawbacks:**
-- The first time generates a complete DOM fragment.
-- The second time generates another complete DOM fragment.
-- The second DOM replaces the first one, which is very performance-intensive.
-
----
-
-## Traditional Approach with Manual DOM Update:
-
-1. **Data**
-2. **Template**
-3. Combine **data + template** to generate real DOM for display.
-4. When **state changes**, repeat the process to generate a new real DOM, but it doesn't replace the original DOM.
-5. Compare the new DOM (`DocumentFragment`) with the original DOM to find differences.
-6. Identify changes, e.g., in input elements.
-7. Use only the new DOM's input elements to replace the corresponding elements in the old DOM.
-
-**Drawbacks:**
-- Performance improvement is not significant.
+**缺陷：**
+- 第一次生成一个完整的 DOM 片段。
+- 第二次生成一个完整的 DOM 片段。
+- 第二次的 DOM 替换第一次的 DOM，非常耗性能。
 
 ---
 
-## Optimized Approach with Virtual DOM:
+## 传统方法与手动 DOM 更新：
 
-1. **State data**
-2. **JSX template**
-3. Combine **data + template** to generate real DOM for display.
+1. **数据**
+2. **模板**
+3. 结合 **数据 + 模板** 生成真实 DOM 进行显示。
+4. 当 **状态发生改变** 时，重复这个过程以生成新的真实 DOM，但不替换原始的 DOM。
+5. 比较新的 DOM（DocumentFragment）和原始的 DOM，找到差异。
+6. 找出发生变化的输入框等元素。
+7. 仅使用新的 DOM 中的输入元素，替换原始 DOM 中的相应元素。
+
+**缺陷：**
+- 性能的提升并不明显。
+
+---
+
+## 优化方法与虚拟 DOM：
+
+1. **状态数据**
+2. **JSX 模板**
+3. 结合 **数据 + 模板** 生成真实 DOM 进行显示。
    ```jsx
-   <div id="abc"><span>Hello world</span></div>
+   <div id="abc"><span>你好，世界</span></div>
+      ```
+4. 生成**虚拟DOM** (**虚拟DOM**就是一个**JS对象**， 用它来描述真实DOM). 
+  - 损耗了新能 但是比起利用JS去生成真实DOM，利用JS 去生成JS 对象 更有性能
+5. state 发生改变 
+6. 数据 + 模板 结合， 生成新的虚拟的DOM
+['div', {id: 'abc', ['span'], {} , 'bye bye'}]
+7. 比较原始虚拟DOM 和 新的虚拟DOM 的区别， 找到区别是span中内容 
+8. 直接操作 DOM, 改span中的内容
+---
