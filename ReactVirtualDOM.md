@@ -39,7 +39,9 @@
   - 损耗了新能 但是比起利用JS去生成真实DOM，利用JS 去生成JS 对象 更有性能
 5. state 发生改变 
 6. 数据 + 模板 结合， 生成新的虚拟的DOM
+```javascript
 ['div', {id: 'abc', ['span'], {} , 'bye bye'}]
+```
 7. 比较原始虚拟DOM 和 新的虚拟DOM 的区别， 找到区别是span中内容 
 8. 直接操作 DOM, 改span中的内容
 ---
